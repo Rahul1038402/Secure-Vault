@@ -15,7 +15,7 @@ declare global {
   var mongooseCache: CachedConnection | undefined;
 }
 
-let cached: CachedConnection = global.mongooseCache || {
+const cached: CachedConnection = global.mongooseCache || {
   conn: null,
   promise: null,
 };
@@ -32,7 +32,6 @@ async function connectDB() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      // Add these SSL/TLS options
       tls: true,
       tlsAllowInvalidCertificates: true,
       serverSelectionTimeoutMS: 5000,

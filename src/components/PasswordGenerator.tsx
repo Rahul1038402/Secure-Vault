@@ -21,7 +21,7 @@ export default function PasswordGenerator({
       const newPassword = generatePassword(options);
       setPassword(newPassword);
       setCopied(false);
-    } catch (error) {
+    } catch {
       alert('Please select at least one character type');
     }
   };

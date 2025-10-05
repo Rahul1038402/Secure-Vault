@@ -4,7 +4,7 @@ import { authOptions } from '../auth/[...nextauth]/route';
 import connectDB from '@/lib/db';
 import VaultItemModel from '@/models/VaultItem';
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
 
