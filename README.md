@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Secure Password Vault
 
-## Getting Started
+A secure, privacy-first password manager with client-side encryption built with Next.js, TypeScript, and MongoDB.
 
-First, run the development server:
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ installed
+- MongoDB Atlas account (free tier works)
+- Git
+
+### Local Setup
 
 ```bash
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit: `http://localhost:3000` (if not preoccupied)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 File Structure Explained
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+password-vault/
+├── src/
+│   ├── app/                          # Next.js App Router
+│   │   ├── api/                      # API routes
+│   │   │   ├── auth/                 # NextAuth endpoints
+│   │   │   ├── vault/                # Vault CRUD operations
+│   │   │   └── user/                 # User registration
+│   │   ├── dashboard/                # Main vault dashboard
+│   │   ├── login/                    # Login page
+│   │   ├── register/                 # Registration page
+│   │   ├── layout.tsx                # Root layout
+│   │   ├── page.tsx                  # Home page (redirects)
+│   │   ├── providers.tsx             # NextAuth provider
+│   │   └── globals.css               # Tailwind imports
+│   ├── components/                   # React components
+│   │   ├── PasswordGenerator.tsx     # Password generation UI
+│   │   ├── VaultList.tsx             # List of vault items
+│   │   ├── VaultItem.tsx             # Single vault item card
+│   │   ├── VaultForm.tsx             # Add/edit form
+│   │   ├── SearchBar.tsx             # Search functionality
+│   │   └── Navbar.tsx                # Navigation bar
+│   ├── lib/                          # Utility functions
+│   │   ├── db.ts                     # MongoDB connection
+│   │   ├── encryption.ts             # Client-side encryption
+│   │   └── passwordGenerator.ts      # Password generation logic
+│   ├── models/                       # MongoDB models
+│   │   ├── User.ts                   # User schema
+│   │   └── VaultItem.ts              # Vault item schema
+│   └── types/                        # TypeScript types
+│       └── index.ts                  # All type definitions
+├── .env.local                        # Environment variables
+├── next.config.js                    # Next.js configuration
+├── tailwind.config.js                # Tailwind configuration
+├── tsconfig.json                     # TypeScript configuration
+└── package.json                      # Dependencies
+```
 
-## Learn More
+## 🔒 Security Features
 
-To learn more about Next.js, take a look at the following resources:
+### Client-Side Encryption
+- **Library**: crypto-js
+- **Key Derivation**: PBKDF2 with 1000 iterations
+- **Why**: Server never sees plaintext passwords
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Password Generation
+- Length: 8-32 characters
+- Options: Uppercase, Lowercase, Numbers, Symbols
+- Excludes similar characters (I, l, 1, O, 0)
+- Cryptographically random
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Auto-Clear Clipboard
+- Copied passwords auto-clear after 15 seconds
+- Prevents accidental exposure
 
-## Deploy on Vercel
+## 🎯 Features Implemented
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-  Password generator with customizable options
+-  Email + password authentication
+-  Vault items with title, username, password, URL, notes
+-  Client-side encryption (via crypto-js)
+-  Copy to clipboard with auto-clear (15s)
+-  Search/filter by title, username, URL
+-  Dark Mode
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🐛 Troubleshooting
+
+### Issue: Build Errors
+**Solution**:
+```bash
+# Clear cache and reinstall
+rm -rf .next node_modules package-lock.json
+npm install
+npm run dev
+```
+
+## 📝 Crypto Library Explanation
+
+**Why crypto-js?**
+
+1. **Simplicity**: Easy API for AES-256 encryption
+2. **Compatibility**: Works in both browser and Node.js
+3. **Battle-tested**: Widely used, well-maintained library
+4. **No Backend Crypto Needed**: Pure client-side encryption
+5. **Small Bundle Size**: Minimal impact on app performance
+
+---
+
+**Built with ❤️ using Next.js, TypeScript, and MongoDB**

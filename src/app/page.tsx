@@ -18,7 +18,7 @@ export default function HomePage() {
   }, [status, router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 dark:from-blue-900 dark:to-purple-900 transition-colors">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-gray-800 transition-colors">
       <div className="text-center text-white">
         <Lock className="w-20 h-20 mx-auto mb-4" />
         <h1 className="text-5xl font-bold mb-4">Secure Vault</h1>
